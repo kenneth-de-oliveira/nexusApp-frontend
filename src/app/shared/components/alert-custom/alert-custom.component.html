@@ -1,0 +1,11 @@
+<div class="row" [hidden]="!error.existError">
+  <div class="col-12">
+      <div #alert class="alert alert-dismissible text-center" [ngClass]="typeError()">
+          <button type="button" class="close" aria-label="Close" aria-hidden="true" (click)="closeAlert()">
+              <span aria-hidden="true" class="close">&times;</span>
+          </button>
+          <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+          <p *ngFor="let item of error.errorList" [innerHtml]="item"></p>
+      </div>
+  </div>
+</div>

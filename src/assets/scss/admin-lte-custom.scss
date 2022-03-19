@@ -1,0 +1,73 @@
+@import './color.scss';
+html {
+  background: #f4f6f9;
+}
+.wrapper, .navbar-white {
+  background-color: $color-gray-light;
+}
+
+.main-header {
+  border-bottom-color: $color-gray-light;
+}
+
+.layout-fixed .main-sidebar {
+  // box-shadow: 0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)!important;
+  box-shadow: 2px 8px 7px rgba(0, 0, 0, 0.125) !important;
+}
+
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active,
+[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-light-] .nav-sidebar>.nav-item:hover>.nav-link,
+.nav-treeview>.nav-item>.nav-link,
+.nav-pills .nav-link:not(.active):hover {
+  border-radius: 40px;
+}
+
+.nav-pills .nav-link:not(.active):hover {
+  color: #00ace6;
+}
+
+.card, .info-box {
+  box-shadow: 2px 8px 7px rgba(0, 0, 0, 0.125) !important;
+}
+
+.btn {
+  &.btn-default,
+  &.btn-primary,
+  &.btn-secondary,
+  &.btn-success,
+  &.btn-info,
+  &.btn-danger,
+  &.btn-warning{
+    box-shadow: 6px 2px 7px rgba(0, 0, 0, 0.125) !important;
+  }
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.rounded-bottom-custom {
+  border-bottom-left-radius: .25rem !important;
+  border-bottom-right-radius: .25rem !important;
+  border-top-left-radius: 0rem !important;
+  border-top-right-radius: 0rem !important;
+}
+
+.brand-text {
+  font-size: 0.9em ;
+}
+
+.input-group>.input-group-prepend:not(:first-child)>.btn.btn-rounded-input-group {
+  border-top-right-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+}
+@media (min-width: 768px) {
+  .content-wrapper, .main-header {
+    margin-left: 270px !important;
+  }
+
+  .sidebar-mini.sidebar-collapse .content-wrapper,
+  .sidebar-mini.sidebar-collapse .main-header {
+    margin-left: 6.6rem!important;
+  }
+}

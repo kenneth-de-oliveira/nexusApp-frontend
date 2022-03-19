@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-6">
+      <small>
+          Exibindo <strong>{{ getTotalPerPage(p) }}</strong> de <strong>{{ items.length }}</strong> registros
+      </small>
+
+  </div>
+  <div class="col-6">
+      <pagination-template [class]="stylesClass" #p="paginationApi" (pageChange)="pageChange.emit($event)"
+          [maxSize]="6" responsive="true">
+          <ul class="pagination pagination-sm justify-content-end">
+              <li class="page-item" [ngClass]="{disabled: p.isFirstPage()}">
+                  <button class="page-link text-dark" (click)="p.setCurrent(1)"><small><i
+                              class="fas fa-angle-double-left"></i></small></button>
+              </li>
+              <li class="page-item" [ngClass]="{disabled: p.isFirstPage()}">
+                  <button class="page-link text-dark" (click)="p.previous()"><small><i
+                              class="fas fa-chevron-left"></i></small></button>
+              </li>
+              <li class="page-item" *ngFor="let page of p.pages"
+                  [ngClass]="{'active': p.getCurrent() === page.value}">
+                  <button class="page-link"
+                      [ngClass]="{'text-white':  p.getCurrent() === page.value, 'text-dark':  p.getCurrent() !== page.value}"
+                      (click)="p.setCurrent(page.value)"> {{ page.label }}</button>
+              </li>
+              <li class="page-item" [ngClass]="{disabled: p.isLastPage()}">
+                  <button class="page-link text-dark" (click)="p.next()"><small><i
+                              class="fas fa-chevron-right"></i></small></button>
+              </li>
+              <li class="page-item" [ngClass]="{disabled: p.isLastPage()}">
+                  <button class="page-link text-dark" (click)="p.setCurrent(p.getLastPage())"><small><i
+                              class="fas fa-angle-double-right"></i></small></button>
+              </li>
+          </ul>
+      </pagination-template>
+  </div>
+</div>

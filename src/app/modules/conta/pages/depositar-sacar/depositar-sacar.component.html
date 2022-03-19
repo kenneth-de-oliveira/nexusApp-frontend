@@ -1,0 +1,54 @@
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="fas fa-hand-holding-usd"></i> {{nameScreen}}
+    </h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.agencia}">Agência</small>
+            </label>
+            <input type="text" class="form-control" formControlName="agencia" [ngClass]="{'is-invalid': displayMessage.agencia}">
+            <small class="form-text text-red" [innerHTML]="displayMessage.agencia"></small>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.numero}">Número da conta</small>
+            </label>
+            <input type="text" class="form-control" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero}">
+            <small class="form-text text-red" [innerHTML]="displayMessage.numero"></small>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.valor}">Valor</small>
+            </label>
+            <input type="number" class="form-control" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor}">
+            <small class="form-text text-red" [innerHTML]="displayMessage.valor"></small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-danger float-right" [disabled]="form.invalid" (click)="onSubmit()">
+          <i class="fa fa-check"></i>
+          Salvar
+        </button>
+        <a class="btn btn-secondary float-right mr-1" [routerLink]="[ '/conta/operacoes']">
+          <i class="fa fa-times"></i>
+          Cancelar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

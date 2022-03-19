@@ -1,0 +1,17 @@
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-pagina-nao-encontrada',
+  templateUrl: './pagina-nao-encontrada.component.html',
+  styleUrls: ['./pagina-nao-encontrada.component.scss']
+})
+export class PaginaNaoEncontradaComponent {
+
+  constructor(private location: Location)  { }
+
+  backClicked() {
+    this.location.back();
+  }
+
+}

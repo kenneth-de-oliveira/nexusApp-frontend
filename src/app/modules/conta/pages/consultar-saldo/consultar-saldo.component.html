@@ -1,0 +1,58 @@
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="fas fa-search"></i> Consultar Saldo
+    </h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.agencia}">Agência</small>
+            </label>
+            <input type="text" class="form-control" formControlName="agencia" [ngClass]="{'is-invalid': displayMessage.agencia}">
+            <small class="form-text text-red" [innerHTML]="displayMessage.agencia"></small>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.numero}">Número da Conta</small>
+            </label>
+            <input type="text" class="form-control" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero}">
+            <small class="form-text text-red" [innerHTML]="displayMessage.numero"></small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-danger float-right" [disabled]="form.invalid" (click)="onSubmit()">
+          <i class="fa fa-search"></i>
+          Pesquisar
+        </button>
+        <a [routerLink]="['/conta/operacoes']" class="btn btn-secondary float-right mr-1">
+          <i class="fa fa-times"></i>
+          Cancelar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4" *ngIf="conta">
+  <div class="col-md-12">
+    <div class="info-box card-custom-left">
+      <span class="info-box-icon bg-default elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+      <div class="info-box-content mt-2">
+        <p class="info-box-text"><strong>Agência</strong> : {{ conta.agencia }}</p>
+        <p class="info-box-text"><strong>Conta</strong>: {{ conta.numero }}</p>
+        <p class="info-box-text"><strong>Saldo</strong>: {{ conta.valor | currency:'BRL' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

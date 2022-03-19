@@ -1,0 +1,68 @@
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="fas fa-search"></i> Consultar Contas
+    </h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.cpf}">CPF</small>
+            </label>
+            <input type="text" class="form-control" formControlName="cpf" [ngClass]="{'is-invalid': displayMessage.cpf}" mask="000.000.000-00">
+            <small class="form-text text-red" [innerHTML]="displayMessage.cpf"></small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-danger float-right" [disabled]="form.invalid" (click)="onSubmit()">
+          <i class="fa fa-search"></i>
+          Pesquisar
+        </button>
+        <a [routerLink]="['/conta/operacoes']" class="btn btn-secondary float-right mr-1">
+          <i class="fa fa-times"></i>
+          Cancelar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-red rounded-bottom-custom mt-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <app-table-custom [items]="listaContas" [itemsPerPage]="15">
+          <ng-template appTableHeader>
+              <tr class="bg-gray-light">
+                <th>Agência</th>
+                <th>Número da conta</th>
+                <th>CPF</th>
+                <th>Cliente</th>
+                <th>E-mail</th>
+              </tr>
+          </ng-template>
+          <ng-template appTableBody let-item>
+            <tr>
+              <td>{{ item.agencia }}</td>
+              <td>{{ item.numero }}</td>
+              <td>{{ item.cpf | mask:'000.000.000-00' }}</td>
+              <td>{{ item.cliente }}</td>
+              <td>{{ item.email }}</td>
+            </tr>
+          </ng-template>
+          <ng-template appTableEmpty>
+            <tr><td colspan="5" class="text-center">Nenhum registro foi encontrado</td></tr>
+          </ng-template>
+        </app-table-custom>
+      </div>
+    </div>
+  </div>
+</div>

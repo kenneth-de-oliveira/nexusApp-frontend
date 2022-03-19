@@ -1,0 +1,18 @@
+@import './color.scss';
+
+.ui-slider {
+  &.ui-slider-horizontal {
+    height: 0.600em !important;
+  }
+
+  .ui-slider-range {
+    background-color: $color-primary !important;
+  }
+
+  .ui-slider-handle {
+    height: 1.300em !important;
+    width: 1.300em !important;
+    background-color: $color-primary !important;
+    border: 2px solid $color-primary-dark !important;
+  }
+}

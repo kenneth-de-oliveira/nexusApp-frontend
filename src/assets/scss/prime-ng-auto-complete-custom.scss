@@ -1,0 +1,116 @@
+@import './color.scss';
+
+.custom-auto-complete {
+  .ui-autocomplete-input,
+  .ui-autocomplete,
+  .ui-autocomplete-multiple-container {
+    width: 100%;
+
+    .ui-button {
+      height: calc(2.25rem + 2px);
+      width:  30px !important;
+      background-color: $color-primary;
+      border-color: $color-primary;
+
+      &:hover {
+        background-color: $color-primary-dark;
+        border-color: $color-primary-dark;
+      }
+    }
+  }
+
+  &.disabled .ui-autocomplete-input,
+  &.disabled .ui-autocomplete,
+  &.disabled .ui-autocomplete-multiple-container{
+    background: #e9ecef !important;
+  }
+}
+
+.custom-auto-complete:not(.nodropdown)  {
+  .ui-autocomplete .ui-autocomplete-input {
+    border-color: $color-border-gray ;
+    width: calc(100% - 30px) !important;
+    height: calc(2.25rem + 2px);
+
+    &:focus {
+      border-color: $color-border-focus !important;
+    }
+  }
+}
+
+.custom-auto-complete.nodropdown {
+  .ui-autocomplete .ui-autocomplete-input {
+    border-color: $color-border-gray ;
+    width: 100% !important;
+    height: calc(2.25rem + 2px);
+
+    &:focus {
+      border-color: $color-border-focus !important;
+    }
+  }
+}
+
+.custom-auto-complete:not(.nodropdown)  {
+  .ui-autocomplete-multiple-container {
+    border-color: $color-border-gray ;
+    width: calc(100% - 30px) !important;
+    min-height: calc(2.25rem + 2px);
+
+    &:focus {
+      border-color: $color-border-focus !important;
+    }
+  }
+}
+
+.custom-auto-complete.nodropdown  {
+  .ui-autocomplete-multiple-container {
+    border-color: $color-border-gray ;
+    width: 100% !important;
+    min-height: calc(2.25rem + 2px);
+
+    &:focus {
+      border-color: $color-border-focus !important;
+    }
+  }
+}
+
+.custom-auto-complete:not(.is-invalid)  {
+  .ui-autocomplete .ui-autocomplete-input, .ui-autocomplete-multiple-container{
+    &:hover {
+      border-color: $color-border-gray !important;
+    }
+  }
+}
+
+
+.custom-auto-complete.is-invalid {
+  .ui-autocomplete .ui-autocomplete-input, .ui-autocomplete-multiple-container {
+    border-color: $color-red !important;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+  }
+
+  .ui-button {
+    border-color: $color-red !important;
+  }
+}
+
+.custom-auto-complete {
+  .ui-autocomplete-multiple-container .ui-autocomplete-token {
+    font-size: 12px !important;
+    background: $color-primary !important;
+    margin: 0 0.286em 0.300em 0 !important;
+  }
+}
+.custom-auto-complete {
+  .ui-autocomplete.ui-autocomplete-multiple .ui-autocomplete-multiple-container {
+    padding: 0.1em 0.429em !important;
+  }
+}
+
+@mixin  width-ui-autocomplete-input($width) {
+  width: $width;
+}

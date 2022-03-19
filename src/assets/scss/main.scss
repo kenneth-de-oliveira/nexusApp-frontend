@@ -1,0 +1,255 @@
+/* You can add global styles to this file, and also import other style files */
+@import './color.scss';
+
+.form-required::after {
+  content: " * ";
+  font-size: 1em;
+  color: #dc3545 !important;
+}
+
+.post {
+  border-bottom: 1px solid #adb5bd !important;
+  color: #666 !important;
+  margin-bottom: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+.column-acoes-center-15 {
+  width: 15%;
+  text-align: center;
+}
+
+#pie-chart-parent { display: grid; }
+
+/*
+ * Custom Radio button
+ */
+ .radios-inline  {
+  display: block;
+  padding: 5px;
+  .radio-custom-container {
+      display: inline-block;
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin-left: 5px;
+      .radio-inline-input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          &:focus ~ .radiomark{
+            border: 1px solid $color-border-focus;
+          }
+
+          &:focus ~ .radiomark::after{
+            top: 5px;
+            left: 5px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: $color-white;
+          }
+          &:checked ~ .radiomark {
+            background-color: $color-primary;
+            border: 1px solid $color-primary-dark;
+          }
+          &:checked ~ .radiomark::after {
+              display: block;
+          }
+      }
+      .radiomark {
+          position: absolute;
+          top: 6px;
+          left: 0;
+          height: 18px;
+          width: 18px;
+          background-color: $color-border-gray;
+          border: 1px solid $color-gray-border-radio;
+          border-radius: 50%;
+          transition: background-color 0.35s linear;
+          &::after {
+              top: 5px;
+              left: 5px;
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: $color-white;
+          }
+      }
+      &:hover .radio-inline-input {
+          &:not(:checked)~.radiomark {
+            background-color: $color-gray-dark-blue;
+          }
+          &:checked~.radiomark {
+              background-color: $color-primary;
+          }
+      }
+  }
+}
+.radiomark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radiomark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+
+/* Create a custom checkbox */
+
+.checkbox-inline{
+  display: block;
+  height: calc(2.25rem + 2px);
+  padding: 5px;
+
+  .checkbox-custom-container {
+    display: inline-block !important;
+    margin-right: 8px;
+    position: relative;
+    padding-left: 25px;
+    font-weight: 100;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .checkbox-input{
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      &:checked~.checkmark {
+        background-color: $color-primary-dark;
+        &:after {
+          display: block;
+        }
+      }
+      &:focus ~.checkmark{
+        border: 2px solid $color-border-focus;
+        box-shadow: 0px 0px 15px rgba(0, 115, 223, 0.64) !important;
+        &::after{
+          top: 1px;
+          left: 5px;
+        }
+      }
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      border-radius: 2px;
+      background-color: $color-primary;
+      border: 1px solid $color-primary-dark;
+      box-shadow: 2px 8px 7px rgba(0, 0, 0, 0.125) !important;
+      &:hover {
+        background-color: $color-primary-dark;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 6px;
+        top: 2px;
+        width: 6px;
+        height: 11px;
+        border: solid $color-white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    }
+
+    .description {
+      font-size: 80%;
+      font-weight: 400;
+    }
+  }
+
+}
+
+@media (min-width: 768px) {
+  .hg-md-200 {
+    height: 200px;
+  }
+
+  .hg-md-400 {
+    height: 400px;
+  }
+
+  .hg-md-500 {
+    height: 500px;
+  }
+
+  .hg-md-600 {
+    height: 700px;
+  }
+
+  .hg-md-700 {
+    height: 700px;
+  }
+
+  .hg-md-800 {
+    height: 800px;
+  }
+
+  .hg-md-900 {
+    height: 900px;
+  }
+}
+
+@media (max-width: 767.9px) {
+  .hg-300 {
+    height: 400px;
+  }
+
+  .hg-400 {
+    height: 400px;
+  }
+
+  .hg-500 {
+    height: 500px;
+  }
+}
+
+.toltip-danger {
+  color: #dc3545 !important;
+}
+
+.card-custom-top {
+  border-top: 2px solid #ff5162 !important;
+  border-radius: 3px;
+}
+
+.card-custom-left {
+  border-left: 2px solid #ff5162 !important;
+  border-radius: 3px;
+}
+
+// Custom sidebar color
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: #ff5162 !important;
+  color: #fff;
+}
+.nav-pills .nav-link:not(.active):hover {
+  color: #ff7684 !important;
+}

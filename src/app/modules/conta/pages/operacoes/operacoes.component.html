@@ -1,0 +1,51 @@
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="fas fas fa-th-list"></i> Operações
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <a class="info-box" [routerLink]="['/conta/depositar']">
+          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+          <div class="info-box-content mt-2">
+            <h5 class="text-dark">Depositar</h5>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="info-box" [routerLink]="['/conta/sacar']">
+          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+          <div class="info-box-content mt-2">
+            <h5 class="text-dark">Sacar</h5>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="info-box" [routerLink]="['/conta/transferir']">
+          <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+          <div class="info-box-content mt-2">
+            <h5 class="text-dark">Transferir</h5>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="info-box" [routerLink]="['/conta/consultar-saldo']">
+          <span class="info-box-icon bg-default elevation-1"><i class="fas fa-search-dollar"></i></span>
+          <div class="info-box-content mt-2">
+            <h5 class="text-dark">Consultar Saldo</h5>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="info-box" [routerLink]="['/conta/consultar-contas']">
+          <span class="info-box-icon bg-default elevation-1"><i class="fas fa-search-dollar"></i></span>
+          <div class="info-box-content mt-2">
+            <h5 class="text-dark">Consultar Contas</h5>
+          </div>
+        </a>
+      </div>
+    </div>     
+  </div>
+</div>
