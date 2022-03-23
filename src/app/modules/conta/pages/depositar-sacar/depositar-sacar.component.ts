@@ -15,9 +15,11 @@ import { ValidatorsCustom } from 'src/app/shared/utils/validators-custom';
 })
 export class DepositarSacarComponent extends FormBase implements OnInit {
 
+  boleto = '/conta/depositar';
   nameScreen = '';
   agencia: string;
   numero: string;
+  depositarBtn: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,8 +40,10 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
   private getNameScreen() {
     if (this.router.url.includes('depositar')) {
       this.nameScreen = 'Depositar';
+      this.depositarBtn = true;
     } else if (this.router.url.includes('sacar')) {
       this.nameScreen = 'Sacar';
+      this.depositarBtn = false;
     }
   }
 
@@ -82,33 +86,16 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
     conta.agencia = this.agencia;
     conta.numero = this.numero;
     if (conta.valor > 0) {
-      this.contaService.depositar(conta).subscribe(
-        () => {
-          SweetalertCustom.showAlertTimer('Operação realizada com sucesso!', { type: 'success' }).then(
-            result => {
-              if (result.dismiss) {
-                this.router.navigate(['conta/operacoes']);
-              }
-            }
-          );
-        }, error => {
-          SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
-            result => {
-              if (result.dismiss) {
-                this.router.navigate(['conta/depositar']);
-              }
-            }
-          );
+      this.alteraValorBoleto(conta.valor, conta.agencia, conta.numero);
+    } else {
+      SweetalertCustom.showAlertTimer(`Não foi possível efetuar o deposito`, { type: 'error' }).then(
+        result => {
+          if (result.dismiss) {
+            this.router.navigate(['conta/depositar']);
+          }
         }
       );
     }
-    SweetalertCustom.showAlertTimer(`Não foi possível efetuar o deposito`, { type: 'error' }).then(
-      result => {
-        if (result.dismiss) {
-          this.router.navigate(['conta/depositar']);
-        }
-      }
-    );
   }
 
   private sacar(conta: ContaDTO) {
@@ -157,4 +144,31 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
     );
   }
 
+  dataAtual() {
+    const agora = Date.now();
+    const hoje = new Date(agora);
+    return hoje.toLocaleDateString();
+  }
+
+
+  alteraValorBoleto(valor: number, agencia: string, numero: string) {
+    this.boleto = `http://www.sicadi.com.br/mhouse/boleto/boleto3.php?
+      numero_banco=341-7
+      &local_pagamento=PAG%C1VEL+EM+QUALQUER+BANCO+AT%C9+O+VENCIMENTO
+      &cedente=Nexus+Pagamentos+LTDA
+      &data_documento=23%2F03%2F2022
+      &numero_documento=DF+00113
+      &especie=DM
+      &aceite=N
+      &data_processamento=23%2F03%2F2022
+      &carteira=109
+      &especie_moeda=R%24
+      &valor=&vencimento=${this.dataAtual()}
+      &agencia=${agencia}&codigo_cedente=${numero}
+      &meunumero=00010435
+      &valor_documento=R$ ${valor},00
+      &instrucoes=Aten%E7%E3o%2C+%0D%0Afique+atento+%E0+data+de+vencimento+do+boleto.%0D%0APague+em+qualquer+casa+lot%E9rica
+      &mensagem3=ATEN%C7%C3O%3A+N%C3O+RECEBER+AP%D3S+15+DIAS+DO+VENCIMENTO
+      &Submit=Enviar`;
+  }
 }
