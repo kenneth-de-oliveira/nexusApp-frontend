@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormBase } from 'src/app/core/classes/form-base';
 import { ContaDTO } from 'src/app/core/dtos/conta.dto';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ContaService } from 'src/app/core/services/conta.service';
 import { SweetalertCustom } from 'src/app/shared/utils/sweetalert-custom';
 import { ValidatorsCustom } from 'src/app/shared/utils/validators-custom';
@@ -15,9 +16,12 @@ import { ValidatorsCustom } from 'src/app/shared/utils/validators-custom';
 export class DepositarSacarComponent extends FormBase implements OnInit {
 
   nameScreen = '';
+  agencia: string;
+  numero: string;
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
     private contaService: ContaService,
     public router: Router
   ) {
@@ -25,6 +29,7 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+    this.getAgenciaNumero();
     this.getNameScreen();
     this.validateMensageError();
     this.createFormGroup();
@@ -40,9 +45,9 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
 
   createFormGroup() {
     this.form = this.formBuilder.group({
-      agencia:      ['', [Validators.required]],
-      numero:       ['', [Validators.required]],
-      valor:        [0, [Validators.required, ValidatorsCustom.lessThanOne]],
+      agencia: ['', [Validators.required]],
+      numero: ['', [Validators.required]],
+      valor: [0, [Validators.required, ValidatorsCustom.lessThanOne]],
     });
   }
 
@@ -65,56 +70,89 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      let conta = new ContaDTO(this.form.value);
-      if (this.nameScreen === 'Depositar') {
-        this.depositar(conta);
-      } else if (this.nameScreen === 'Sacar') {
-        this.sacar(conta);
-      }
+    let conta = new ContaDTO(this.form.value);
+    if (this.nameScreen === 'Depositar') {
+      this.depositar(conta);
+    } else if (this.nameScreen === 'Sacar') {
+      this.sacar(conta);
     }
   }
 
   private depositar(conta: ContaDTO) {
-    this.contaService.depositar(conta).subscribe(
-      () => {
-        SweetalertCustom.showAlertTimer('Operação realizada com sucesso.', {type: 'success'}).then(
-          result => {
-            if (result.dismiss) {
-              this.router.navigate(['conta/operacoes']);
+    conta.agencia = this.agencia;
+    conta.numero = this.numero;
+    if (conta.valor > 0) {
+      this.contaService.depositar(conta).subscribe(
+        () => {
+          SweetalertCustom.showAlertTimer('Operação realizada com sucesso!', { type: 'success' }).then(
+            result => {
+              if (result.dismiss) {
+                this.router.navigate(['conta/operacoes']);
+              }
             }
-          }
-        );
-      }, error => {
-        SweetalertCustom.showAlertTimer(`${error.message}`, {type: 'error'}).then(
-          result => {
-            if (result.dismiss) {
-              this.router.navigate(['conta/depositar']);
+          );
+        }, error => {
+          SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
+            result => {
+              if (result.dismiss) {
+                this.router.navigate(['conta/depositar']);
+              }
             }
-          }
-        );
+          );
+        }
+      );
+    }
+    SweetalertCustom.showAlertTimer(`Não foi possível efetuar o deposito`, { type: 'error' }).then(
+      result => {
+        if (result.dismiss) {
+          this.router.navigate(['conta/depositar']);
+        }
       }
     );
   }
 
   private sacar(conta: ContaDTO) {
-    this.contaService.sacar(conta).subscribe(
-      () => {
-        SweetalertCustom.showAlertTimer('Operação realizada com sucesso.', { type: 'success' }).then(
-          result => {
-            if (result.dismiss) {
-              this.router.navigate(['conta/operacoes']);
+    conta.agencia = this.agencia;
+    conta.numero = this.numero;
+    if (conta.valor > 0) {
+      this.contaService.sacar(conta).subscribe(
+        () => {
+          SweetalertCustom.showAlertTimer('Operação realizada com sucesso!', { type: 'success' }).then(
+            result => {
+              if (result.dismiss) {
+                this.router.navigate(['conta/operacoes']);
+              }
             }
-          }
-        );
-      }, error => {
-        SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
-          result => {
-            if (result.dismiss) {
-              this.router.navigate(['conta/sacar']);
+          );
+        }, error => {
+          SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
+            result => {
+              if (result.dismiss) {
+                this.router.navigate(['conta/sacar']);
+              }
             }
-          }
-        );
+          );
+        }
+      );
+    }
+    SweetalertCustom.showAlertTimer(`Não foi possível
+     ${this.nameScreen.toLocaleLowerCase()} o valor`, { type: 'error' }).then(
+      result => {
+        if (result.dismiss) {
+          this.router.navigate(['conta/sacar']);
+        }
+      }
+    );
+  }
+
+  getAgenciaNumero(): any {
+    const nomeUsuario = this.authService.getUsuarioAutenticado();
+    this.contaService.getNomeUsuario(nomeUsuario).subscribe(
+      response => {
+        if (response) {
+          this.agencia = response.body.agencia;
+          this.numero = response.body.numero;
+        }
       }
     );
   }

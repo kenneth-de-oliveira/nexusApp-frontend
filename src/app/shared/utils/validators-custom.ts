@@ -88,6 +88,7 @@ export class ValidatorsCustom {
         };
     }
 
+
     /**
      * Valida se o campo tem o númeto minimo informado
      * @param length Tamanho a ser utilizado na validação
@@ -101,23 +102,36 @@ export class ValidatorsCustom {
                 }
             }
             return null;
-        };
-    }
+          };
+        }
 
-    /**
+        /**
      * Verifica se o e-mail é valido
      * @param control Campo a ser validado
-     */
+         */
     static validEmail(control: AbstractControl) {
-        const email = control.value.trim();
+      const email = control.value.trim();
 
-        // tslint:disable-next-line: max-line-length
-        const regexP = /[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/g;
+      // tslint:disable-next-line: max-line-length
+      const regexP = /[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/g;
 
-        if (email && !regexP.test(email)) {
-            return { emailInvalid: true };
+      if (email && !regexP.test(email)) {
+        return { emailInvalid: true };
         }
         return null;
+      }
+
+    /**
+     * Valida se o a senha contém caracteres, números, letras maiúscula e tamanho entre 8 e 16
+     * @param senha senha
+     */
+    static validaSenha(control: AbstractControl) {
+      const password = control.value.trim();
+      const regexP = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,16}$/g
+      if (password && !regexP.test(password)) {
+        return { passwordInvalid: true };
+      }
+      return null;
     }
 
     /**

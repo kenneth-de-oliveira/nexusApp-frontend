@@ -60,7 +60,7 @@ export class ConsultarContasComponent extends FormBase implements OnInit {
             })
           });
         }, error => {
-          SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
+          SweetalertCustom.showAlertConfirm(`${error.message}`, { type: 'error' }).then(
             result => {
               if (result.dismiss) {
                 this.router.navigate(['conta/consultar-contas']);

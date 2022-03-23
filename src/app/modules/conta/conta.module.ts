@@ -9,6 +9,7 @@ import { ConsultarContasComponent } from './pages/consultar-contas/consultar-con
 import { ConsultarSaldoComponent } from './pages/consultar-saldo/consultar-saldo.component';
 import { ContaComponent } from './pages/conta.component';
 import { DepositarSacarComponent } from './pages/depositar-sacar/depositar-sacar.component';
+import { MinhaContaComponent } from './pages/minha-conta/minha-conta.component';
 import { OperacoesComponent } from './pages/operacoes/operacoes.component';
 import { TransferirComponent } from './pages/transferir/transferir.component';
 
@@ -16,6 +17,7 @@ import { TransferirComponent } from './pages/transferir/transferir.component';
   declarations: [
     ContaComponent,
     OperacoesComponent,
+    MinhaContaComponent,
     DepositarSacarComponent,
     TransferirComponent,
     ConsultarSaldoComponent,
@@ -29,6 +31,15 @@ import { TransferirComponent } from './pages/transferir/transferir.component';
     FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+  ],
+  exports: [
+    ContaComponent,
+    MinhaContaComponent,
+    OperacoesComponent,
+    DepositarSacarComponent,
+    TransferirComponent,
+    ConsultarSaldoComponent,
+    ConsultarContasComponent
   ]
 })
 export class ContaModule { }

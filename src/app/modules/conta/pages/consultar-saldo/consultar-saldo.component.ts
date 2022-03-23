@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormBase } from 'src/app/core/classes/form-base';
 import { ContaDTO } from 'src/app/core/dtos/conta.dto';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ContaService } from 'src/app/core/services/conta.service';
 import { SweetalertCustom } from 'src/app/shared/utils/sweetalert-custom';
 
@@ -13,11 +14,14 @@ import { SweetalertCustom } from 'src/app/shared/utils/sweetalert-custom';
 })
 export class ConsultarSaldoComponent extends FormBase implements OnInit {
 
-  conta: ContaDTO;
+  conta: ContaDTO = null;
+  agencia: string;
+  numero: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private contaService: ContaService,
+    private authService: AuthService,
     public router: Router
   ) {
     super()
@@ -26,6 +30,7 @@ export class ConsultarSaldoComponent extends FormBase implements OnInit {
   ngOnInit() {
     this.createFormGroup();
     this.validateMessageError();
+    this.getAgenciaNumero();
   }
 
   createFormGroup() {
@@ -47,25 +52,34 @@ export class ConsultarSaldoComponent extends FormBase implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      const agencia = this.form.get('agencia').value;
-      const numero = this.form.get('numero').value;
-      this.contaService.getSaldo(agencia, numero).subscribe(
-        response => {
-          this.conta = new ContaDTO({
-            agencia: agencia,
-            numero: numero,
-            valor: response.body.saldo
-          });
-        }, error => SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
-          result => {
-            if (result.dismiss) {
-              this.router.navigate(['conta/consultar-saldo']);
-            }
+    this.contaService.getSaldo(this.agencia, this.numero).subscribe(
+      response => {
+        this.conta = new ContaDTO({
+          agencia: this.agencia,
+          numero: this.numero,
+          valor: response.body.saldo
+        });
+      },
+      error => SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
+        result => {
+          if (result.dismiss) {
+            this.router.navigate(['conta/consultar-saldo']);
           }
-        )
+        }
       )
-    }
+    )
+  }
+
+  getAgenciaNumero(): any {
+    const nomeUsuario = this.authService.getUsuarioAutenticado();
+    this.contaService.getNomeUsuario(nomeUsuario).subscribe(
+      response => {
+        if (response) {
+          this.agencia = response.body.agencia;
+          this.numero = response.body.numero;
+        }
+      }
+    );
   }
 
 }
