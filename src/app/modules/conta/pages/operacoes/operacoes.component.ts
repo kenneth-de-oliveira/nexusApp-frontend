@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { ContaService } from 'src/app/core/services/conta.service';
 import { ExtratoListDTO } from 'src/app/core/dtos/extrato-list.dto';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ContaDTO } from 'src/app/core/dtos/conta.dto';
+import { ContaService } from 'src/app/core/services/conta.service';
+
 
 @Component({
   selector: 'app-operacoes',
@@ -14,6 +13,8 @@ import { ContaDTO } from 'src/app/core/dtos/conta.dto';
 export class OperacoesComponent implements OnInit {
 
   listaExtrato = new Array<ExtratoListDTO>();
+
+  extratoPdf: boolean = false;
 
   constructor(
     private contaService: ContaService,
@@ -42,6 +43,45 @@ export class OperacoesComponent implements OnInit {
         }
       }
     );
+  }
+
+  extratoPdfConta() {
+    const nomeUsuario = this.authService.getUsuarioAutenticado();
+    this.contaService.getNomeUsuario(nomeUsuario).subscribe(
+      res => {
+        if (res) {
+          this.extratoPdf = true;
+          this.contaService.getExtratoPdfConta(res.body.id).subscribe(res => {
+            if (res) {
+              this.emitirPdf(res, 'RELATORIO_EXTRATO_CONTA.pdf')
+            }
+          });
+        }
+      });
+  }
+
+  emitirPdf(res: any, nomeArquivo) {
+
+    const arquivo = res.body;
+
+    const blob = window.URL.createObjectURL(arquivo);
+
+    const link = document.createElement('a');
+    link.href = blob;
+    link.download = nomeArquivo;
+
+    link.dispatchEvent(new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    }));
+
+    setTimeout(() => {
+      window.URL.revokeObjectURL(blob);
+      link.remove();
+    }, 3600 * 5);
+
+    this.extratoPdf = false;
   }
 
 }

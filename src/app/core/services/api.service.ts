@@ -13,12 +13,12 @@ export class ApiService {
 
   constructor(
     private httpClient: HttpClient
-  ) { }
+    ) { }
 
-  /**
-   * Obtem o token da sessão para utilizar nas requisições
-   */
-  public getOptions(): any {
+    /**
+     * Obtem o token da sessão para utilizar nas requisições
+     */
+    public getOptions(): any {
     // tratar caso tenha o token
     const TOKEN = localStorage.getItem('nexusApp-frontend.token') ? 'Bearer ' + localStorage.getItem('nexusApp-frontend.token') : '';
 
@@ -37,7 +37,7 @@ export class ApiService {
    */
   public get(path: string): Observable<any> {
     return this.httpClient.get(BASE_URL + path, this.getOptions())
-      .pipe(catchError((e: any) => throwError(e)));
+    .pipe(catchError((e: any) => throwError(e)));
   }
 
   /**
@@ -47,7 +47,7 @@ export class ApiService {
    */
   public post(path: string, body: any): Observable<any> {
     return this.httpClient.post(BASE_URL + path, JSON.stringify(body), this.getOptions())
-      .pipe(catchError((e: any) => throwError(e)));
+    .pipe(catchError((e: any) => throwError(e)));
   }
 
   /**
@@ -57,7 +57,7 @@ export class ApiService {
    */
   public put(path: string, body: any): Observable<any> {
     return this.httpClient.put(BASE_URL + path, JSON.stringify(body), this.getOptions())
-      .pipe(catchError((e: any) => throwError(e)));
+    .pipe(catchError((e: any) => throwError(e)));
   }
 
   /**
@@ -67,7 +67,7 @@ export class ApiService {
    */
   public patch(path: string, body: any): Observable<any> {
     return this.httpClient.patch(BASE_URL + path, JSON.stringify(body), this.getOptions())
-      .pipe(catchError((e: any) => throwError(e)));
+    .pipe(catchError((e: any) => throwError(e)));
   }
 
   /**
@@ -76,6 +76,15 @@ export class ApiService {
    */
   public delete(path: string): Observable<any> {
     return this.httpClient.delete(BASE_URL + path, this.getOptions())
-      .pipe(catchError((e: any) => throwError(e)));
+    .pipe(catchError((e: any) => throwError(e)));
+  }
+
+  /**
+   * Generic GET Download Method
+   * @param path URL path
+   */
+  public getArquivo(path: string): Observable<any> {
+    return this.httpClient.get(BASE_URL + path, { observe: 'response', responseType: 'blob' })
+    .pipe(catchError((e: any) => throwError(e)));
   }
 }

@@ -45,4 +45,8 @@ export class ContaService {
       return this.apiService.get(`${this.controller}/extratos?idConta=${id}`);
     }
 
+    getExtratoPdfConta(id: number): Observable<any> {
+      return this.apiService.getArquivo(`${this.controller}/${id}/extratos/pdf`);
+    }
+
 }

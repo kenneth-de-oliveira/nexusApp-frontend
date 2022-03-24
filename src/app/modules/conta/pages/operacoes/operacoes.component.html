@@ -50,41 +50,52 @@
   </div>
 </div>
 
+<div class="d-flex justify-content-center" *ngIf="extratoPdf">
+  <div class="spinner-border mt-2" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
 <div class="card mb-0 mt-4 rounded-0">
   <div class="card-header card-custom-top">
-    <h5 class="align-middle text-dark">
-      <i class="nav-icon fas fa-dollar-sign fa-do"></i> Extrato
-    </h5>
+    <div class="mt-0 rounded-0">
+      <h5 class="align-middle text-dark">
+        <i class="nav-icon fas fa-receipt"></i> Extrato
+        <button type="button" (click)="extratoPdfConta()" class="btn btn-warning float-right">
+          Download pdf <i class='fas fa-download'></i>
+        </button>
+      </h5>
+    </div>
   </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-12">
-          <app-table-custom [items]="listaExtrato" [itemsPerPage]="4">
-            <ng-template appTableHeader>
-              <tr class="bg-gray-light">
-                <th>Agência</th>
-                <th>Número da conta</th>
-                <th>Valor</th>
-                <th>Data</th>
-                <th>Operacão</th>
-              </tr>
-            </ng-template>
-            <ng-template appTableBody let-item>
-              <tr>
-                <td>{{ item.agencia }}</td>
-                <td>{{ item.numero }}</td>
-                <td>{{ item.valor | currency:'R$ ' }}</td>
-                <td>{{ item.dataExtrato | date:"dd-MM-yyyy" }}</td>
-                <td>{{ item.operacao | lowercase }}</td>
-              </tr>
-            </ng-template>
-            <ng-template appTableEmpty>
-              <tr>
-                <td colspan="5" class="text-center">Nenhum registro foi encontrado</td>
-              </tr>
-            </ng-template>
-          </app-table-custom>
-        </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <app-table-custom [items]="listaExtrato" [itemsPerPage]="4">
+          <ng-template appTableHeader>
+            <tr class="bg-gray-light">
+              <th>Agência</th>
+              <th>Número da conta</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th>Operacão</th>
+            </tr>
+          </ng-template>
+          <ng-template appTableBody let-item>
+            <tr>
+              <td>{{ item.agencia }}</td>
+              <td>{{ item.numero }}</td>
+              <td>{{ item.valor | currency:'R$ ' }}</td>
+              <td>{{ item.dataExtrato }}</td>
+              <td>{{ item.operacao }}</td>
+            </tr>
+          </ng-template>
+          <ng-template appTableEmpty>
+            <tr>
+              <td colspan="5" class="text-center">Nenhum registro foi encontrado</td>
+            </tr>
+          </ng-template>
+        </app-table-custom>
       </div>
     </div>
+  </div>
 </div>
