@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { BasicComponent } from 'src/app/layouts/basic/basic.component';
+import { BoletoComponent } from './pages/boletos/boleto.component';
 import { ConsultarContasComponent } from './pages/consultar-contas/consultar-contas.component';
 import { ConsultarSaldoComponent } from './pages/consultar-saldo/consultar-saldo.component';
 import { DepositarSacarComponent } from './pages/depositar-sacar/depositar-sacar.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
 
     { path: 'minha-conta' , component: MinhaContaComponent },
     { path: 'operacoes' , component: OperacoesComponent },
+    { path: 'boleto' , component: BoletoComponent },
     { path: 'depositar', component: DepositarSacarComponent },
     { path: 'sacar', component: DepositarSacarComponent },
     { path: 'transferir', component: TransferirComponent },

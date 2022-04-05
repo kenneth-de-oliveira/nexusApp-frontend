@@ -5,6 +5,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ContaRoutingModule } from './conta-routing.module';
+import { BoletoComponent } from './pages/boletos/boleto.component';
 import { ConsultarContasComponent } from './pages/consultar-contas/consultar-contas.component';
 import { ConsultarSaldoComponent } from './pages/consultar-saldo/consultar-saldo.component';
 import { ContaComponent } from './pages/conta.component';
@@ -17,6 +18,7 @@ import { TransferirComponent } from './pages/transferir/transferir.component';
   declarations: [
     ContaComponent,
     OperacoesComponent,
+    BoletoComponent,
     MinhaContaComponent,
     DepositarSacarComponent,
     TransferirComponent,
@@ -36,6 +38,7 @@ import { TransferirComponent } from './pages/transferir/transferir.component';
     ContaComponent,
     MinhaContaComponent,
     OperacoesComponent,
+    BoletoComponent,
     DepositarSacarComponent,
     TransferirComponent,
     ConsultarSaldoComponent,

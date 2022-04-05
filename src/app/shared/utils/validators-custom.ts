@@ -13,6 +13,17 @@ export class ValidatorsCustom {
         return null;
     }
 
+    static validateCodigoDeBarras(control: AbstractControl) {
+      let codigoDeBarras = control.value;
+        if (!codigoDeBarras) { return null; }
+        codigoDeBarras = codigoDeBarras.toString().trim();
+        if (!codigoDeBarras) { return null; }
+        if (codigoDeBarras.length != 28) {
+          return { codigoDeBarrasInvalid: true };
+      }
+      return null
+    }
+
     /**
      * Verifica se o CPF é valido
      * @param control Campo a ser validado

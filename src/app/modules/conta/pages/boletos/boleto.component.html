@@ -1,0 +1,76 @@
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="far fa-credit-card"></i> Pagar Boleto
+    </h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="form-required">
+              <small [ngClass]="{'text-red': displayMessage.codigoDeBarras}">Código de Barra</small>
+            </label>
+            <input type="text" class="form-control" formControlName="codigoDeBarras"
+              [ngClass]="{'is-invalid': displayMessage.codigoDeBarras}" mask="0000000000000000000000000000"
+              placeholder="Digite o código aqui: ex, 3429179292600010389340000001">
+            <small class="form-text text-red" [innerHTML]="displayMessage.codigoDeBarras"></small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-danger float-right" [disabled]="form.invalid" (click)="onSubmit()">
+          <i class="fa fa-search"></i>
+          Pesquisar
+        </button>
+        <a [routerLink]="['/conta/operacoes']" class="btn btn-secondary float-right mr-1">
+          <i class="fa fa-times"></i>
+          Cancelar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-0 mt-4 rounded-0" *ngIf="pesquisaBoleto">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <app-table-custom [items]="boletos">
+          <ng-template appTableHeader>
+            <tr class="bg-gray-light">
+              <th>Código</th>
+              <th>Valor</th>
+              <th>Cedente</th>
+              <th>Emissor</th>
+              <th>Status</th>
+              <th>Data de Vencimento</th>
+            </tr>
+          </ng-template>
+          <ng-template appTableBody let-item>
+            <tr>
+              <td>{{ item.codigo }}</td>
+              <td>{{ item.valor | currency:'R$ ' }}</td>
+              <td>{{ item.cedente }}</td>
+              <td>{{ item.emissor }}</td>
+              <td>{{ item.status }}</td>
+              <td>{{ item.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+            </tr>
+          </ng-template>
+        </app-table-custom>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer" *ngIf="pesquisaBoleto">
+    <div *ngIf="pesquisaBoleto">
+      <button type="button" (click)="pagarBoleto()" class="btn btn-warning float-right">
+        Pagar Boleto
+      </button>
+    </div>
+  </div>
+</div>
