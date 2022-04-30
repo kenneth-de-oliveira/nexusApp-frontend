@@ -61,7 +61,8 @@ html {
   border-top-right-radius: .25rem;
   border-bottom-right-radius: .25rem;
 }
-@media (min-width: 768px) {
+
+@media (min-width: auto) {
   .content-wrapper, .main-header {
     margin-left: 270px !important;
   }

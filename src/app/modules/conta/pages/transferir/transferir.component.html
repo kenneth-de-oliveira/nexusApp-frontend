@@ -12,7 +12,7 @@
               <label class="form-required">
                 <small [ngClass]="{'text-red': displayMessage.agencia}">Agência de origem</small>
               </label>
-              <input type="text" class="form-control" formControlName="agencia" [ngClass]="{'is-invalid': displayMessage.agencia}">
+              <input value = "{{this.numero}}" type="text" class="form-control" formControlName="agencia" disabled>
               <small class="form-text text-red" [innerHTML]="displayMessage.agencia"></small>
             </div>
           </div>
@@ -21,7 +21,7 @@
               <label class="form-required">
                 <small [ngClass]="{'text-red': displayMessage.numero}">Conta de origem</small>
               </label>
-              <input type="text" class="form-control" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero}">
+              <input value = "{{this.numero}}" type="text" class="form-control" formControlName="numero" disabled>
               <small class="form-text text-red" [innerHTML]="displayMessage.numero"></small>
             </div>
           </div>
@@ -64,7 +64,7 @@
     <div class="card-footer">
       <div class="row">
         <div class="col-12">
-          <button type="submit" class="btn btn-danger float-right" [disabled]="form.invalid" (click)="onSubmit()">
+          <button type="submit" class="btn btn-danger float-right" (click)="onSubmit()">
             <i class="fa fa-check"></i>
             Salvar
           </button>

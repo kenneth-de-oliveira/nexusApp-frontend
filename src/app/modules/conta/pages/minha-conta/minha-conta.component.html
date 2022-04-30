@@ -1,0 +1,75 @@
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="fas fas fa-th-list"></i> Minha Conta
+    </h5>
+  </div>
+  <div class="card-body">
+    <div class="">
+      <div class="info-box">
+        <span class="info-box-icon bg-success elevation-1"><i class="far fa-address-card"></i></span>
+        <div class="info-box-content mt-2">
+          <h5 class="text-dark">Informações Pessoais</h5>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1 text-secondary">Nome</label>
+              <input value = "{{this.nome}}" type="text" class="form-control py-3" name="nome" disabled/>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="small mb-1 text-secondary">Sobrenome</label>
+              <input value = "{{this.sobrenome}}" type="text" class="form-control py-3" name="sobrenome" disabled/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label class="small mb-1 text-secondary">Telefone</label>
+              <input value = "{{this.telefone}}" type="text" class="form-control py-3" name="telefone" disabled />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="small mb-1 text-secondary">E-mail</label>
+              <input value = "{{this.email}}" type="text" class="form-control py-3" name="email" disabled/>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="small mb-1 text-secondary">CPF</label>
+              <input value = "{{this.documento}}" type="text" class="form-control py-3" name="documento" disabled/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="far fa-address-card"></i></span>
+        <div class="info-box-content mt-2">
+          <h5 class="text-dark">Endereco</h5>
+          <div class="form-group">
+            <label class="small mb-1 text-secondary">Logradouro</label>
+            <input value = "{{this.logradouro}}" type="text" class="form-control py-3" name="logradouro" disabled/>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label class="small mb-1 text-secondary">Número</label>
+              <input value = "{{this.numero}}" type="text" class="form-control py-3" name="numero" disabled/>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="small mb-1 text-secondary">Cidade</label>
+              <input value = "{{this.cidade}}" type="text" class="form-control py-3" name="cidade" disabled/>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="small mb-1 text-secondary">Estado</label>
+              <input value = "{{this.uf}}" type="text" class="form-control py-3" name="uf" disabled/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1 text-secondary">Bairro</label>
+              <input value = "{{this.bairro}}" type="text" class="form-control py-3" name="bairro" disabled/>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="small mb-1 text-secondary">Código Postal</label>
+              <input value = "{{this.cep}}" type="text" class="form-control py-3" name="cep" disabled/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

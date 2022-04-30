@@ -13,6 +13,10 @@ export class ContaService {
 
     constructor(private apiService: ApiService) {}
 
+    cadastrar(conta: ContaDTO): Observable<any> {
+      return this.apiService.post(`publico/${this.controller}`, conta);
+    }
+
     depositar(conta: ContaDTO): Observable<any> {
         return this.apiService.post(`${this.controller}/depositar`, conta);
     }
@@ -32,4 +36,13 @@ export class ContaService {
     getContas(cpf: string): Observable<any> {
         return this.apiService.get(`${this.controller}/buscar-por-cpf/${cpf}`);
     }
+
+    getNomeUsuario( nome: string ): Observable<any> {
+      return this.apiService.get(`${this.controller}/buscar-por-usuario/${nome}`);
+    }
+
+    getExtratoIdConta(id: number): Observable<any> {
+      return this.apiService.get(`${this.controller}/extratos?idConta=${id}`);
+    }
+
 }

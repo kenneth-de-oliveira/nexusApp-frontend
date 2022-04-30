@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormBase } from 'src/app/core/classes/form-base';
 import { TransferenciaDTO } from 'src/app/core/dtos/transferencia.dto';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { ContaService } from 'src/app/core/services/conta.service';
 import { SweetalertCustom } from 'src/app/shared/utils/sweetalert-custom';
 import { ValidatorsCustom } from 'src/app/shared/utils/validators-custom';
@@ -14,8 +15,12 @@ import { ValidatorsCustom } from 'src/app/shared/utils/validators-custom';
 })
 export class TransferirComponent extends FormBase implements OnInit {
 
+  agencia: string;
+  numero: string;
+
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
     private contaService: ContaService,
     public router: Router
   ) {
@@ -23,6 +28,7 @@ export class TransferirComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAgenciaNumero();
     this.validateMensageError();
     this.createFormGroup();
   }
@@ -63,8 +69,11 @@ export class TransferirComponent extends FormBase implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      let transferencia = new TransferenciaDTO(this.form.value);
+    const conta = this.form.value;
+    conta.agencia = this.agencia;
+    conta.numero = this.numero;
+    let transferencia = new TransferenciaDTO(conta);
+    if (conta.valor > 0) {
       this.contaService.transferir(transferencia).subscribe(
         () => {
           SweetalertCustom.showAlertTimer('Operação realizada com sucesso.', { type: 'success' }).then(
@@ -75,7 +84,8 @@ export class TransferirComponent extends FormBase implements OnInit {
             }
           );
         }, error => {
-          SweetalertCustom.showAlertTimer(`${error.message}`, { type: 'error' }).then(
+          const msg = `${error.message ? error.message : 'Não foi possível transferir o valor '}`;
+          SweetalertCustom.showAlertTimer(msg, { type: 'error' }).then(
             result => {
               if (result.dismiss) {
                 this.router.navigate(['conta/transferir']);
@@ -85,6 +95,25 @@ export class TransferirComponent extends FormBase implements OnInit {
         }
       );
     }
+    SweetalertCustom.showAlertTimer(`Não foi possível transferir o valor`, { type: 'error' }).then(
+      result => {
+        if (result.dismiss) {
+          this.router.navigate(['conta/transferir']);
+        }
+      }
+    );
+  }
+
+  getAgenciaNumero(): any {
+    const nomeUsuario = this.authService.getUsuarioAutenticado();
+    this.contaService.getNomeUsuario(nomeUsuario).subscribe(
+      response => {
+        if (response) {
+          this.agencia = response.body.agencia;
+          this.numero = response.body.numero;
+        }
+      }
+    );
   }
 
 }

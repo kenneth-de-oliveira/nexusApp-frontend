@@ -7,15 +7,6 @@
   </a>
   <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="javascript:void(0)" class="d-block">Alexander Pierce</a>
-      </div>
-    </div> -->
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -37,15 +28,21 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a [routerLink]="['/conta/operacoes']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Operações</p>
+                <i class="far fa-circle nav-icon py1"></i>
+                <p>Menu</p>
+              </a>
+              <a [routerLink]="['/conta/minha-conta']" class="nav-link">
+                <i class="far fa-circle nav-icon py1"></i>
+                <p>Minha Conta</p>
               </a>
             </li>
           </ul>
         </li>
       </ul>
+
     </nav>
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
 </aside>
+

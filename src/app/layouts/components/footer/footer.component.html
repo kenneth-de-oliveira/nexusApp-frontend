@@ -1,8 +1,17 @@
 <footer class="main-footer">
+  Nexus App
   <strong>
-    Indra
+    v1.0.0
   </strong>
   <div class="float-right d-none d-sm-block">
-    <b>Nexus App</b> v1.0.0
+    <a [routerLink]="['/conta/minha-conta']">
+        {{ usuarioLogado }}
+    </a>
+    <a (click)="logout();" href="#">
+      <i class="fas fa-sign-out-alt"></i>
+      <strong>
+        Sair
+      </strong>
+    </a>
   </div>
 </footer>

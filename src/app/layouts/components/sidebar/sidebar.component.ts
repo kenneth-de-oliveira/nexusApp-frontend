@@ -1,6 +1,5 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Util } from 'src/app/shared/utils/util';
 
 declare var $: any;
 
@@ -53,8 +52,8 @@ export class SidebarComponent implements OnInit, AfterContentChecked {
       .addClass('active');
   }
 
-  getUsuarioUnidadeTipoInstituicao() {
-    return Util.getUsuarioSession().tipoInstituicao;
-  }
+  // getUsuarioUnidadeTipoInstituicao() {
+  //   return Util.getUsuarioSession().tipoInstituicao;
+  // }
 
 }

@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PaginaNaoEncontradaComponent } from './layouts/pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { BasicComponent } from './layouts/basic/basic.component';
+import { LoginComponent } from './modules/login/login.component';
+import { InicioComponent } from './modules/home/componentes/inicio/inicio.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: './modules/home/home.module#HomeModule'
-  },
-  {
-    path: 'conta',
-    loadChildren: './modules/conta/conta.module#ContaModule'
-  },
-  {
-    path: '**',
-    component: PaginaNaoEncontradaComponent
-  },
+  { path: 'login', component: LoginComponent },
+  { path: '', component: BasicComponent, children: [
+    { path : 'home', component: InicioComponent, canActivate : [AuthGuard] },
+    { path: '' , redirectTo: '/home', pathMatch: 'full' }
+  ]}
 ];
 
 @NgModule({

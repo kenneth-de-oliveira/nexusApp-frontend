@@ -1,7 +1,7 @@
 <div class="card mb-0 mt-4 rounded-0">
   <div class="card-header card-custom-top">
     <h5 class="align-middle text-dark">
-      <i class="fas fas fa-th-list"></i> Operações
+      <i class="fas fas fa-th-list"></i> Meu Conta
     </h5>
   </div>
   <div class="card-body">
@@ -46,6 +46,45 @@
           </div>
         </a>
       </div>
-    </div>     
+    </div>
   </div>
+</div>
+
+<div class="card mb-0 mt-4 rounded-0">
+  <div class="card-header card-custom-top">
+    <h5 class="align-middle text-dark">
+      <i class="nav-icon fas fa-dollar-sign fa-do"></i> Extrato
+    </h5>
+  </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <app-table-custom [items]="listaExtrato" [itemsPerPage]="4">
+            <ng-template appTableHeader>
+              <tr class="bg-gray-light">
+                <th>Agência</th>
+                <th>Número da conta</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Operacão</th>
+              </tr>
+            </ng-template>
+            <ng-template appTableBody let-item>
+              <tr>
+                <td>{{ item.agencia }}</td>
+                <td>{{ item.numero }}</td>
+                <td>{{ item.valor | currency:'R$ ' }}</td>
+                <td>{{ item.dataExtrato | date:"dd-MM-yyyy" }}</td>
+                <td>{{ item.operacao | lowercase }}</td>
+              </tr>
+            </ng-template>
+            <ng-template appTableEmpty>
+              <tr>
+                <td colspan="5" class="text-center">Nenhum registro foi encontrado</td>
+              </tr>
+            </ng-template>
+          </app-table-custom>
+        </div>
+      </div>
+    </div>
 </div>

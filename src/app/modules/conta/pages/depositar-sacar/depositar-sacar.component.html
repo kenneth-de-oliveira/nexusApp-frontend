@@ -9,28 +9,22 @@
       <div class="row">
         <div class="col-12 col-md-4">
           <div class="form-group">
-            <label class="form-required">
-              <small [ngClass]="{'text-red': displayMessage.agencia}">Agência</small>
-            </label>
-            <input type="text" class="form-control" formControlName="agencia" [ngClass]="{'is-invalid': displayMessage.agencia}">
-            <small class="form-text text-red" [innerHTML]="displayMessage.agencia"></small>
+            <small>Agência</small>
+            <input value={{this.agencia}} type="text" class="form-control" formControlName="agencia" disabled>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="form-group">
-            <label class="form-required">
-              <small [ngClass]="{'text-red': displayMessage.numero}">Número da conta</small>
-            </label>
-            <input type="text" class="form-control" formControlName="numero" [ngClass]="{'is-invalid': displayMessage.numero}">
-            <small class="form-text text-red" [innerHTML]="displayMessage.numero"></small>
+            <small>Número da conta</small>
+            <input value={{this.numero}} type="text" class="form-control" formControlName="numero" disabled>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="form-group">
-            <label class="form-required">
+            <div class="form-required">
               <small [ngClass]="{'text-red': displayMessage.valor}">Valor</small>
-            </label>
-            <input type="number" class="form-control" formControlName="valor" [ngClass]="{'is-invalid': displayMessage.valor}">
+            </div>
+            <input type="number" class="form-control" formControlName="valor">
             <small class="form-text text-red" [innerHTML]="displayMessage.valor"></small>
           </div>
         </div>
@@ -40,10 +34,20 @@
   <div class="card-footer">
     <div class="row">
       <div class="col-12">
-        <button type="submit" class="btn btn-danger float-right" [disabled]="form.invalid" (click)="onSubmit()">
-          <i class="fa fa-check"></i>
-          Salvar
-        </button>
+        <a href="{{this.boleto}}">
+          <div *ngIf="depositarBtn">
+            <button type="submit" class="btn btn-danger float-right" (click)="onSubmit()">
+              <i class="fa fa-check"></i>
+              Gerar boleto
+            </button>
+          </div>
+        </a>
+        <div *ngIf="!depositarBtn">
+          <button type="submit" class="btn btn-danger float-right" (click)="onSubmit()">
+            <i class="fa fa-check"></i>
+            Sacar
+          </button>
+        </div>
         <a class="btn btn-secondary float-right mr-1" [routerLink]="[ '/conta/operacoes']">
           <i class="fa fa-times"></i>
           Cancelar

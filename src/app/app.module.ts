@@ -1,43 +1,40 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
+import { TokenInterceptor } from './core/interceptor/token.interceptor';
+import { AuthService } from './core/services/auth.service';
 import { BasicComponent } from './layouts/basic/basic.component';
-import { FooterComponent } from './layouts/components/footer/footer.component';
-import { NavbarComponent } from './layouts/components/navbar/navbar.component';
-import { SidebarComponent } from './layouts/components/sidebar/sidebar.component';
-import { PaginaNaoEncontradaComponent } from './layouts/pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
-import { PaginaSemAutorizacaoComponent } from './layouts/pages/pagina-sem-autorizacao/pagina-sem-autorizacao.component';
-import { SharedModule } from './shared/shared.module';
+import { TemplateModule } from './layouts/template.module';
+import { ContaModule } from './modules/conta/conta.module';
+import { InicioComponent } from './modules/home/componentes/inicio/inicio.component';
+import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasicComponent,
-    NavbarComponent,
-    FooterComponent,
-    SidebarComponent,
-    PaginaNaoEncontradaComponent,
-    PaginaSemAutorizacaoComponent
+    InicioComponent,
+    LoginComponent,
+    BasicComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CoreModule,
     FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
-    SharedModule.forRoot(),
-    NgxMaskModule.forRoot(),
-    NgbModule
+    TemplateModule,
+    ContaModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
