@@ -4,12 +4,16 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { PaginaSemAutorizacaoComponent } from './pages/pagina-sem-autorizacao/pagina-sem-autorizacao.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    PaginaNaoEncontradaComponent,
+    PaginaSemAutorizacaoComponent
   ],
   imports: [
     CommonModule,
