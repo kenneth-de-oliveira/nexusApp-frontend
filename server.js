@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const appName = 'nexusapp-frontend';
+const appName = 'nexusApp-frontend';
 const outputPath = `${__dirname}/dist/${appName}`;
 
 app.use(express.static(outputPath));
