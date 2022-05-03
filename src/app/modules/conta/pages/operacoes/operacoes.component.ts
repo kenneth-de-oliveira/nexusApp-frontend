@@ -28,6 +28,7 @@ export class OperacoesComponent implements OnInit {
         if (response) {
           this.contaService.getExtratoIdConta(response.body.id).subscribe(
             response => {
+              response.body = ordenarPorData(response);
               this.listaExtrato = response.body.map(item => {
                 return new ExtratoListDTO({
                   agencia: item.agencia,
@@ -37,6 +38,9 @@ export class OperacoesComponent implements OnInit {
                   dataExtrato: item.dataExtrato
                 })
               });
+              function ordenarPorData(response) {
+                return response.body.sort((a, b) => (a.dataExtrato > b.dataExtrato) ? -1 : 1);
+              }
             }
           );
         }
