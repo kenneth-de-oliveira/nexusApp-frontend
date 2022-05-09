@@ -46,7 +46,9 @@ export class LoginComponent {
         this.logged = true;
         const access_token = JSON.stringify(response);
         localStorage.setItem('access_token', access_token)
-        this.router.navigate(['/home'])
+        setTimeout(() => {
+          this.router.navigate(['/home'])
+        }, 1000);
       }, () => {
         SweetalertCustom.showAlertTimer('Usuário e/ou senha incorreto(s).', { type: 'error' }).then(
           result => {
