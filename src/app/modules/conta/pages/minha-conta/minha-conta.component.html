@@ -34,6 +34,10 @@
               <input value = "{{this.documento}}" type="text" class="form-control py-3" name="documento" disabled/>
             </div>
           </div>
+          <button type="submit" class="btn btn-danger float-right" data-toggle="modal" data-target="#modalInformacoes">
+            <i class="fas fa-edit"></i>
+            Editar
+          </button>
         </div>
       </div>
       <div class="info-box">
@@ -68,8 +72,86 @@
               <input value = "{{this.cep}}" type="text" class="form-control py-3" name="cep" disabled/>
             </div>
           </div>
+          <button type="submit" class="btn btn-danger float-right" data-toggle="modal" data-target="#modalEndereco">
+            <i class="fas fa-edit"></i>
+            Editar
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalEndereco">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-dark">Editar informações de endereço</h4>
+      </div>
+      <div class="modal-body">
+        <label class="small mb-1 text-secondary">Endereço:</label>
+        <input type="text" class="form-control py-3" name="logradouro"
+          placeholder="Logradouro: Alameda Cristo Rei, n° 128"
+           [(ngModel)]="novoLogradouro" required />
+        <label class="small mb-1 text-secondary">Número:</label>
+        <input type="text" class="form-control py-3" name="numero" placeholder="Número"
+          autocomplete="off" [(ngModel)]="novoNumero" required />
+        <label class="small mb-1 text-secondary">Cidade:</label>
+        <input type="text" class="form-control py-3" name="cidade" placeholder="Cidade"
+          autocomplete="off" [(ngModel)]="novoCidade" required />
+        <label class="small mb-1 text-secondary">Bairro:</label>
+        <input type="text" class="form-control py-3" name="bairro" placeholder="Bairro"
+          autocomplete="off" [(ngModel)]="novoBairro" required />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label class="small mb-1 text-secondary">UF:</label>
+            <input type="text" class="form-control py-3" name="uf" placeholder="UF" autocomplete="off"
+            [(ngModel)]="novoUf" required />
+          </div>
+          <div class="form-group col-md-6">
+            <label class="small mb-1 text-secondary">CEP:</label>
+            <input type="text" class="form-control py-3" name="cep" placeholder="Código Postal"
+              autocomplete="off"  [(ngModel)]="novoCep" required />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateInformacoesEndereco()">
+          <i class="fas fa-save"></i> Salvar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          <i class="fa fa-times"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalInformacoes">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-dark">Editar informações de contato</h4>
+      </div>
+      <div class="modal-body">
+        <label class="small mb-1 text-secondary">Nome:</label>
+        <input type="text" class="form-control py-3" name="nome" [(ngModel)]="nome" disabled />
+        <label class="small mb-1 text-secondary">Sobrenome:</label>
+        <input type="text" class="form-control py-3" name="sobrenome" [(ngModel)]="sobrenome" disabled />
+        <label class="small mb-1 text-secondary">Telefone:</label>
+        <input type="text" class="form-control py-3" name="telefone"
+        placeholder="Digite seu novo telefone" autocomplete="off" [(ngModel)]="novoTelefone" required/>
+        <label class="small mb-1 text-secondary">E-mail:</label>
+        <input type="text" class="form-control py-3" name="email"
+        placeholder="Digite seu novo e-mail" autocomplete="off" [(ngModel)]="novoEmail" required />
+        <label class="small mb-1 text-secondary">CPF:</label>
+        <input type="text" class="form-control py-3" name="cpf" [(ngModel)]="documento" disabled />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateInformacoesContato()">
+          <i class="fas fa-save"></i> Salvar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          <i class="fa fa-times"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
