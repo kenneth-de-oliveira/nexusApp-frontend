@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://nexusapp-backend.herokuapp.com/',
+  apiUrl: 'http://localhost:8081/',
   clientId: 'my-angular-app',
   clientSecret: '@321',
   obterTokenUrl: 'oauth/token'
