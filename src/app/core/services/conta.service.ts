@@ -45,4 +45,8 @@ export class ContaService {
       return this.apiService.get(`${this.controller}/extratos?idConta=${id}`);
     }
 
+    deletar(id: number): Observable<any> {
+      return this.apiService.delete(`${this.controller}/${id}`);
+    }
+
 }

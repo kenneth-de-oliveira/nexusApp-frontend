@@ -35,6 +35,10 @@
                 <i class="far fa-circle nav-icon py1"></i>
                 <p>Minha Conta</p>
               </a>
+              <a [routerLink]="['']" class="nav-link" data-toggle="modal" data-target="#deletarConta">
+                <i class="far fa-circle nav-icon py1"></i>
+                <p>Deletar</p>
+              </a>
             </li>
           </ul>
         </li>
@@ -46,3 +50,48 @@
   <!-- /.sidebar -->
 </aside>
 
+<!-- The Modal -->
+<div class="modal fade" id="deletarConta">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Olá, {{ usuarioLogado }} </h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body mx-auto form-group">
+        <div class="alert alert-warning alert-dismissible fade show">
+          <strong>Atenção!</strong> Você está prestes a deletar sua conta.
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show">
+          <strong>Você tem certeza? </strong> Ao deletar você perderá todos os privilégios da sua conta.
+          Antes consulte seu saldo, verfique suas transações, pois ao deletar sua conta não será mais possível
+          recupera-lá.
+        </div>
+        <div class="d-flex justify-content-center text-secondary" *ngIf="deletando">
+          <div class="spinner-border" role="status">
+           <span class="sr-only"></span>
+          </div>
+        </div>
+        <div class="m-4"></div>
+        <p> Por favor, digite sua senha para confirmar </p>
+        <input type="password" name="password" minlength="8" maxlength="12" [(ngModel)]="password"
+        class="form-control" placeholder="Digite sua senha" required />
+        <div class="m-3"></div>
+        <button type="submit" class="btn btn-danger btn-block" (click)="deletarConta()">
+          Eu entendo as consequências, deletar esta conta
+        </button>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <span class="mx-auto">
+          Inativar Conta
+        </span>
+      </div>
+
+    </div>
+  </div>
