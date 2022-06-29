@@ -49,4 +49,8 @@ export class ContaService {
       return this.apiService.getArquivo(`${this.controller}/${id}/extratos/pdf`);
     }
 
+    deletar(id: number): Observable<any> {
+      return this.apiService.delete(`${this.controller}/${id}`);
+    }
+
 }

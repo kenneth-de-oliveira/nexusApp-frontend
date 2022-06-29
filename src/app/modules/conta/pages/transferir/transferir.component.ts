@@ -95,13 +95,6 @@ export class TransferirComponent extends FormBase implements OnInit {
         }
       );
     }
-    SweetalertCustom.showAlertTimer(`Não foi possível transferir o valor`, { type: 'error' }).then(
-      result => {
-        if (result.dismiss) {
-          this.router.navigate(['conta/transferir']);
-        }
-      }
-    );
   }
 
   getAgenciaNumero(): any {

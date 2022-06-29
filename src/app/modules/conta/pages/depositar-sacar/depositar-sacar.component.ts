@@ -122,14 +122,6 @@ export class DepositarSacarComponent extends FormBase implements OnInit {
         }
       );
     }
-    SweetalertCustom.showAlertTimer(`Não foi possível
-     ${this.nameScreen.toLocaleLowerCase()} o valor`, { type: 'error' }).then(
-      result => {
-        if (result.dismiss) {
-          this.router.navigate(['conta/sacar']);
-        }
-      }
-    );
   }
 
   getAgenciaNumero(): any {

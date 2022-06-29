@@ -29,6 +29,7 @@ export class LoginComponent {
   telefone: string;
   cadastrando: boolean;
   mensagemSucesso: string;
+  logged: boolean = false;
   errors: String[];
 
   constructor(
@@ -42,9 +43,12 @@ export class LoginComponent {
     this.authService
       .tentarLogar(this.username, this.password)
       .subscribe(response => {
+        this.logged = true;
         const access_token = JSON.stringify(response);
         localStorage.setItem('access_token', access_token)
-        this.router.navigate(['/home'])
+        setTimeout(() => {
+          this.router.navigate(['/home'])
+        }, 1000);
       }, () => {
         SweetalertCustom.showAlertTimer('Usuário e/ou senha incorreto(s).', { type: 'error' }).then(
           result => {
@@ -106,6 +110,7 @@ export class LoginComponent {
     this.cadastrando = false
     this.mensagemSucesso = null
     this.errors = []
+    this.logged = false;
   }
 
 }
