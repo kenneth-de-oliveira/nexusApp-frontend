@@ -49,43 +49,43 @@ export class OperacoesComponent implements OnInit {
     );
   }
 
-  extratoPdfConta() {
-    const nomeUsuario = this.authService.getUsuarioAutenticado();
-    this.contaService.getNomeUsuario(nomeUsuario).subscribe(
-      res => {
-        if (res) {
-          this.extratoPdf = true;
-          this.contaService.getExtratoPdfConta(res.body.id).subscribe(res => {
-            if (res) {
-              this.emitirPdf(res, 'RELATORIO_EXTRATO_CONTA.pdf')
-            }
-          });
-        }
-      });
-  }
+  // extratoPdfConta() {
+  //   const nomeUsuario = this.authService.getUsuarioAutenticado();
+  //   this.contaService.getNomeUsuario(nomeUsuario).subscribe(
+  //     res => {
+  //       if (res) {
+  //         this.extratoPdf = true;
+  //         this.contaService.getExtratoPdfConta(res.body.id).subscribe(res => {
+  //           if (res) {
+  //             this.emitirPdf(res, 'RELATORIO_EXTRATO_CONTA.pdf')
+  //           }
+  //         });
+  //       }
+  //     });
+  // }
 
-  emitirPdf(res: any, nomeArquivo) {
+  // emitirPdf(res: any, nomeArquivo) {
 
-    const arquivo = res.body;
+  //   const arquivo = res.body;
 
-    const blob = window.URL.createObjectURL(arquivo);
+  //   const blob = window.URL.createObjectURL(arquivo);
 
-    const link = document.createElement('a');
-    link.href = blob;
-    link.download = nomeArquivo;
+  //   const link = document.createElement('a');
+  //   link.href = blob;
+  //   link.download = nomeArquivo;
 
-    link.dispatchEvent(new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    }));
+  //   link.dispatchEvent(new MouseEvent('click', {
+  //     bubbles: true,
+  //     cancelable: true,
+  //     view: window
+  //   }));
 
-    setTimeout(() => {
-      window.URL.revokeObjectURL(blob);
-      link.remove();
-    }, 3600 * 5);
+  //   setTimeout(() => {
+  //     window.URL.revokeObjectURL(blob);
+  //     link.remove();
+  //   }, 3600 * 5);
 
-    this.extratoPdf = false;
-  }
+  //   this.extratoPdf = false;
+  // }
 
 }
